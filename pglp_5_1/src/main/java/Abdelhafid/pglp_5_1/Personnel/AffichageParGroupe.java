@@ -1,10 +1,16 @@
 package Abdelhafid.pglp_5_1.Personnel;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 
 import java.util.Iterator;
 
-public class AffichageParGroupe implements Iterable<PersonnelInterface> {
+public class AffichageParGroupe implements Iterable<PersonnelInterface>,Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 39135549156587357L;
 
 	private ArrayDeque<PersonnelInterface> file;
 

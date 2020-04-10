@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 public class Telephone implements Serializable {
 	
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -42640595796165094L;
 	private String tel_type;
 	private String numero;
 	

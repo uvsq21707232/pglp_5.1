@@ -7,10 +7,12 @@ import java.util.Iterator;
 public class GroupePersonnel implements PersonnelInterface,Iterable<PersonnelInterface>,Serializable{
 	
 	
+	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2325828234782586422L;
 
 	private ArrayList<PersonnelInterface> liste_personnels;
 	
@@ -25,7 +27,7 @@ public class GroupePersonnel implements PersonnelInterface,Iterable<PersonnelInt
 	
 	
 	public void print() {
-		System.out.println("Numéro du groupe :" + id_composite);
+		
 		for (PersonnelInterface per_inter : liste_personnels) {
 			
 			per_inter.print();
