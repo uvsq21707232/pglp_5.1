@@ -6,33 +6,46 @@ import Abdelhafid.pglp_5_1.Personnel.AffichageParGroupe;
 
 public class AffichageParGroupeDAO implements Dao<Abdelhafid.pglp_5_1.Personnel.AffichageParGroupe> {
 
+	private ArrayList<AffichageParGroupe> affList;
+
+	public AffichageParGroupeDAO() {
+
+		this.affList = new ArrayList<AffichageParGroupe>();
+
+	}
+
 	@Override
 	public void ajouter(AffichageParGroupe object) {
-		// TODO Auto-generated method stub
+
+		affList.add(object);
 
 	}
 
 	@Override
 	public AffichageParGroupe find(int id) {
-		// TODO Auto-generated method stub
+		for (AffichageParGroupe aff : affList) {
+			if (aff.getIdentification() == id) {
+				return aff;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public ArrayList<AffichageParGroupe> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return (ArrayList<AffichageParGroupe>) affList.clone();
 	}
 
 	@Override
 	public AffichageParGroupe update(AffichageParGroupe obj) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public void delete(AffichageParGroupe obj) {
-		// TODO Auto-generated method stub
+		affList.remove(obj);
 
 	}
 
