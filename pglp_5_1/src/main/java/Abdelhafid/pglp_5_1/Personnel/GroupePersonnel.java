@@ -1,5 +1,9 @@
 package Abdelhafid.pglp_5_1.Personnel;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,17 +25,17 @@ public class GroupePersonnel implements PersonnelInterface,Iterable<PersonnelInt
 	
 	public  GroupePersonnel() {
 		id_composite = Compteur++;
-		
 		liste_personnels= new ArrayList<PersonnelInterface>();
 	}
 	
 	
 	public void print() {
-		
+		System.out.println("Id : " + id_composite);
 		for (PersonnelInterface per_inter : liste_personnels) {
 			
 			per_inter.print();
 		}
+		
 		
 	}
 	
@@ -66,4 +70,58 @@ public class GroupePersonnel implements PersonnelInterface,Iterable<PersonnelInt
 		return liste_personnels.iterator();
 	}
 
+	public void serialiser(final String path) {
+        ObjectOutputStream out = null;
+        try {
+            final FileOutputStream fichierO = new FileOutputStream(path);
+            out = new ObjectOutputStream(fichierO);
+            out.writeObject(this);
+            out.flush();
+            out.close();
+        } catch (final java.io.IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            } catch (final java.io.IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+	
+	
+	public static GroupePersonnel deSerialiser(final String path) {
+        ObjectInputStream in = null;
+ GroupePersonnel grp = null;
+        try {
+        	
+            final FileInputStream fichieri = new FileInputStream(path);
+            in = new ObjectInputStream(fichieri);
+           grp = (GroupePersonnel) in.readObject();
+           
+        } catch (final java.io.IOException e) {
+            e.printStackTrace();
+            
+        } catch (final ClassNotFoundException e) {
+            e.printStackTrace();
+            
+        } finally {
+        	
+            try {
+                if (in != null) {
+                	in.close();
+                }
+                
+            } catch (final java.io.IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return grp;
+    }
+	
+	
+	
 }

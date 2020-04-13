@@ -1,8 +1,12 @@
 package Abdelhafid.pglp_5_1.Personnel;
 
 import static org.junit.Assert.*;
+
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 import Abdelhafid.pglp_5_1.Personnel.Telephone;
@@ -10,42 +14,46 @@ import Abdelhafid.pglp_5_1.Personnel.Personnel.PersonnelBuilder;
 
 public class PersonnelTest {
 
-	private Personnel personne;
+ 
 
-	@Before()
+	@Test()
 
-	public void initialisation() {
+	public void test() {
 
-		personne = new PersonnelBuilder("BELHABIB", "Soufiane", "Informaticien")
+		Personnel	personne = new PersonnelBuilder("BELHABIB", "Soufiane", "Informaticien")
 				.Naissance(LocalDate.parse("1992-06-16", DateTimeFormatter.ISO_DATE))
 				.ajouter_numero(new Telephone("Perso", "0650784512")).ajouter_numero(new Telephone("Pro", "0650784513"))
 				.build();
+				personne.print();
+		
+	}
+	
+	@Test()
+
+	public void testSerialiser() {
+
+		Personnel	personne1 = new PersonnelBuilder("BELHABIB", "Soufiane", "Informaticien")
+				.Naissance(LocalDate.parse("1992-06-16", DateTimeFormatter.ISO_DATE))
+				.ajouter_numero(new Telephone("Perso", "0650784512")).ajouter_numero(new Telephone("Pro", "0650784513"))
+				.build();
+				personne1.serialiser("personne1");
+				
+				Personnel personne2 = Personnel.deSerialiser("personne1");
+		        File file = new File("personne1");
+		        file.delete();
+		        assertTrue(personne1.getNom().equalsIgnoreCase(personne2.getNom())
+		        				&& personne1.getPrenom().equals(personne2.getPrenom())
+		        				&& personne1.getDate_naissance().isEqual(personne2.getDate_naissance())
+		        				
+		        				);
+		      
+				
+		
 	}
 
-	@Test()
-	public void testGetNom() {
-		assertEquals(personne.getNom(), "BELHABIB");
-	}
+	
 
-	@Test()
-	public void testGetPrenom() {
-		assertEquals(personne.getPrenom(), "Soufiane");
-	}
-
-	@Test()
-	public void testGetFonction() {
-		assertEquals(personne.getFonction(), "Informaticien");
-	}
-
-	@Test()
-	public void testGetDate_naissance() {
-		assertEquals(personne.getDate_naissance(), LocalDate.parse("1992-06-16", DateTimeFormatter.ISO_DATE));
-	}
-
-	@Test()
-	public void testGetTele() {
-		personne.print();
-	}
+	
 
 
 }

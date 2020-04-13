@@ -1,6 +1,8 @@
 package Abdelhafid.pglp_5_1.Personnel;
 
 import static org.junit.Assert.*;
+
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -58,4 +60,38 @@ public class TestAffiGroupe {
         assertTrue(l1.toString().equalsIgnoreCase(l2.toString()));
 	}
 
+	@Test
+	public void testSerialization() {
+		
+		GroupePersonnel g1 = new GroupePersonnel();
+		GroupePersonnel g2 = new GroupePersonnel();
+		GroupePersonnel g3 = new GroupePersonnel();
+		
+		Personnel	personne1 = new PersonnelBuilder("BELHABIB", "Soufiane", "Informaticien")
+				.Naissance(LocalDate.parse("1992-06-16", DateTimeFormatter.ISO_DATE))
+				.ajouter_numero(new Telephone("Perso", "0650784512")).ajouter_numero(new Telephone("Pro", "0650784513"))
+				.build();
+		
+		Personnel	personne2 = new PersonnelBuilder("BELHABIB", "Riyad", "Secretaire")
+				.Naissance(LocalDate.parse("1992-08-16", DateTimeFormatter.ISO_DATE))
+				.ajouter_numero(new Telephone("Personnel", "0650784512")).ajouter_numero(new Telephone("Pro", "0650784513"))
+				.build();
+	
+		AffichageParGroupe affpg = new AffichageParGroupe();
+		
+		g1.ajouter(personne1);
+		g2.ajouter(personne2);
+		g1.ajouter(g2);
+		g2.ajouter(g3);
+		
+        affpg.parcoursLargeur(g1);
+        affpg.serialiser("AffGroupe");
+        AffichageParGroupe affg2 = AffichageParGroupe.deSerialiser("AffGroupe");
+        File f = new File("AffGroupe");
+        f.delete();
+        
+        assertEquals(affpg.getIdentification(),affg2.getIdentification());
+	}
+	
+	
 }
