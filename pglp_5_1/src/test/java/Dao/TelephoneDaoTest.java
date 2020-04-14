@@ -60,7 +60,10 @@ public class TelephoneDaoTest {
 		
 		
 	}
-	
+	@Test
+	public void testUpdate() {
+		
+	}
 	
 	
 	

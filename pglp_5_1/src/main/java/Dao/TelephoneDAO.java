@@ -21,9 +21,11 @@ public class TelephoneDAO implements Dao<Abdelhafid.pglp_5_1.Personnel.Telephone
 	}
 
 	@Override
+	
 	public Telephone find(int id) {
 		for (Telephone tel : num_telephone) {
 			if (Integer.parseInt(tel.getNumero()) == id) {
+				
 				return tel;
 			}
 		}

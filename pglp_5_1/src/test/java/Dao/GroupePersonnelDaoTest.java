@@ -15,7 +15,7 @@ import Abdelhafid.pglp_5_1.Personnel.Personnel.PersonnelBuilder;
 
 public class GroupePersonnelDaoTest {
 	
-@Test()
+@Test
 	
 	public void testAjout() {
 		
