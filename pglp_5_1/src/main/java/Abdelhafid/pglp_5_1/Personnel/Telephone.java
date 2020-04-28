@@ -1,5 +1,9 @@
 package Abdelhafid.pglp_5_1.Personnel;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public class Telephone implements Serializable {
@@ -35,6 +39,51 @@ public class Telephone implements Serializable {
 		return numero;
 	}
 
+	public void serialiser(final String path) {
+        ObjectOutputStream out = null;
+        try {
+            final FileOutputStream fichierO = new FileOutputStream(path);
+            out = new ObjectOutputStream(fichierO);
+            out.writeObject(this);
+            out.flush();
+            out.close();
+        } catch (final java.io.IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.flush();
+                    out.close();
+                }
+            } catch (final java.io.IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+	
+	
+	public static Telephone deSerialiser(final String path) {
+        ObjectInputStream in = null;
+       Telephone telephone = null;
+        try {
+            final FileInputStream fichierS = new FileInputStream(path);
+            in = new ObjectInputStream(fichierS);
+            telephone = (Telephone) in.readObject();
+        } catch (final java.io.IOException e) {
+            e.printStackTrace();
+        } catch (final ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (in != null) {
+                	in.close();
+                }
+            } catch (final java.io.IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return telephone;
+    }
 	
 	
 	
