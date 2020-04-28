@@ -30,8 +30,33 @@ public class FactoryDao {
         return new AffichageParGroupeDAO();
     }
 	
-	
-	
+	 public static Dao<Personnel> getPersonnelDAO(final String deserialiser) {
+	        if (deserialiser == null) {
+	            return new PersonnelDAO();
+	        } else {
+	            return PersonnelDAO.deSerialiser(deserialiser);
+	        }
+	    }
+	 
+	 
+	 public static Dao<GroupePersonnel>
+	 getGroupePersonnelDAO(final String deserialiser) {
+	        if (deserialiser== null) {
+	            return new GroupePersonnelDAO();
+	        } else {
+	            return GroupePersonnelDAO.deSerialiser(deserialiser);
+	        }
+	    }
+	   
+	 
+	    public static Dao<AffichageParGroupe>
+	    getAffichageParGroupeDAO(final String deserialiser) {
+	        if (deserialiser == null) {
+	            return new AffichageParGroupeDAO();
+	        } else {
+	            return AffichageParGroupeDAO.deSerialiser(deserialiser);
+	        }
+	    }
 	
 	
 	
