@@ -1,7 +1,8 @@
 package Dao;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class GroupePersonnelDaoTest {
 		
 	}
 
+@Test
 public void testDelete() {
 	
 	GroupePersonnelDAO groupe=   new GroupePersonnelDAO();
@@ -85,6 +87,26 @@ public void testFindAll() {
 @Test
 public void testUpdate() {}
 
+@Test
+public void testSerialisation() {
+	GroupePersonnelDAO grp = new GroupePersonnelDAO();
+	GroupePersonnel gP = new GroupePersonnel();
+	Personnel	personne1 = new PersonnelBuilder("BELHABIB", "Riyad", "Informaticien")
+			.Naissance(LocalDate.parse("1992-06-16", DateTimeFormatter.ISO_DATE))
+			.ajouter_numero(new Telephone("Perso", "0650784512")).ajouter_numero(new Telephone("Pro", "0650784513"))
+			.build();
+	gP.ajouter(personne1);
+	grp.ajouter(gP);
+	grp.serialiser("groupdao");
+	
+	GroupePersonnelDAO grp2= GroupePersonnelDAO.deSerialiser("groupdao");
+	
+	File f = new File("groupdao");
+    f.delete();
+    assertEquals(grp.find(0),grp2.find(0));
+	
+	
+}
 
 
 }

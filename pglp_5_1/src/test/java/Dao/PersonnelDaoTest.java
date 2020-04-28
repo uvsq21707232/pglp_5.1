@@ -2,6 +2,7 @@ package Dao;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -80,6 +81,30 @@ public void testDelete() {
 
 @Test
 public void testUpdate() {}
+
+@Test
+public void testSerialisation() {
+
+PersonnelDAO personnels = new PersonnelDAO();
+Personnel	personne = new PersonnelBuilder("BELHABIB", "Riyad", "Informaticien")
+.Naissance(LocalDate.parse("1992-06-16", DateTimeFormatter.ISO_DATE))
+.ajouter_numero(new Telephone("Perso", "0650784512")).ajouter_numero(new Telephone("Pro", "0650784513"))
+.build();
+personnels.ajouter(personne);
+personnels.serialiser("fichierDAOPERSONNE");
+
+PersonnelDAO pers= PersonnelDAO.deSerialiser("fichierDAOPERSONNE");
+File f = new File("fichierDAOPERSONNE");
+f.delete();
+
+assertEquals(personnels.find(0),pers.find(0));
+
+}
+
+
+
+
+
 
 
 }
